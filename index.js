@@ -6,8 +6,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-
-
 /* INICIO DAS CONFIGURAÇÕES DO EJS:  */
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -19,61 +17,29 @@ app.get('/', (req, res)=>{
 });
 /* FIM DA ROTA DE ACESSO AS PÁGINAS EJS*/
 
-/* INICIO DA ROTA DE CADASTRO DE CATEGORIA */
-app.get('/categoria', (req, res)=>{
-    res.render('categoria/index');
+/* INICIO DA ROTA DE CADASTRO DE CLIENTES */
+app.get('/cliente', (req, res)=>{
+    res.render('cliente/index');
 });
-/* FIM DA ROTA DE CADASTRO DE CATEGORIA */
+/* FIM DA ROTA DE CADASTRO DE CLIENTES */
 
-/* INICIO DA ROTA DE LISTAGEM DE CATEGORIA */
-app.get('/listagemCategoria', (req, res)=>{
+/* INICIO DA ROTA DE LISTAGEM DE CLIENTES */
+app.get('/listagemClientes', (req, res)=>{
         /* CONFIGURAÇÃO DE REQUISIÇÃO PARA O BACK END */
 
         /* ROTA DO BACK END */
-        const urlListarCategoria = 'http://localhost:3000/listarCategoria';
+        const urlListarCliente = 'http://localhost:3000/ListarCliente';
     
         /* CHAMAR AXIOS PARA A ROTA DO BACK END */
-        axios.get(urlListarCategoria)
+        axios.get(urlListarCliente)
         .then((response)=>{
-            let categoria = response.data;
-            //console.log(response.data);
-            res.render('categoria/listagemCategoria', {categoria});
+            let cliente = response.data;
+            res.render('cliente/listagemClientes', {cliente});
         })
         .catch((error)=>{
         });
 })
-/* FIM DA ROTA DE LISTAGEM DE CATEGORIA */
-
-/* INICIO DA ROTA QUE LEVA ATÉ  A EDIÇÃO DE CATEGORIA */
-app.get('/editarCategoria/:cod_categoria', (req, res)=>{
-    let {cod_categoria} = req.params;
-
-    /* ROTA DO BACK END */
-    urlListarCategoriaPK = `http://localhost:3000/listarCategoriaPK/${cod_categoria}`;
-
-    /* CHAMAR AXIOS PARA A ROTA DO BACK END */
-    axios.get(urlListarCategoriaPK)
-    .then((response)=>{
-        let categoria = response.data;
-        //console.log(categoria.data);
-        res.render('categoria/editarCategoria.ejs', {categoria});
-    })
-    .catch((error)=>{
-    });
-});
-/* FIM DA ROTA QUE LEVA ATÉ A EDIÇÃO DE CATEGORIA */
-
-/* INICIO DA ROTA DE EDIÇÃO DE CATEGORIA */
-app.post('/editarCategoria', (req, res)=>{
-    //console.log(req.body);
-    let urlEditar = 'http://localhost:3000/alterarCategoria';
-
-    axios.put(urlEditar, req.body)
-    .then((response)=>{
-        res.send('DADO ALTERADO');
-    });
-});
-/* FIM DA ROTA DE EDIÇÃO DE CATEGORIA */
+/* FIM DA ROTA DE LISTAGEM DE CLIENTES */
 
 app.listen(3001, ()=>{
     console.log("SERVIDOR FRONTEND RODANDO EM - http://localhost:3001");

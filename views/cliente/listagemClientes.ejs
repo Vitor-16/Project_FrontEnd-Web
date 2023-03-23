@@ -5,20 +5,20 @@
     <%- include('../partials/menu.ejs') %>
 
         <div class="card">
-            <div class="card-header">LISTAGEM DE CATEGORIAS</div>
+            <div class="card-header">LISTAGEM DE CLIENTES</div>
         </div>
 
     <%
-        categoria.data.forEach(categoria=>{      
+        cliente.data.forEach(cliente=>{      
     %>
         <div class="card mt-2 p-1">
             <div class="card-body">
-                <%= categoria.nome_categoria %>
+                <%= cliente.nome_Cliente %>
             </div>
 
             <div class="btn-group mr-2">
-                <a href="/editarCategoria/<%= categoria.cod_categoria %>" class="btn btn-success btn-sm mr-2 ml-2">EDITAR CATEGORIA</a>
-                <a href="#" class="btn btn-danger btn-sm mr-2 ml-2">EXCLUIR CATEGORIA</a>
+                <a href="/editarClientes/<%= cliente.id_Clientes %>" class="btn btn-success btn-sm mr-2 ml-2">EDITAR CLIENTE</a>
+                <a href="#" class="btn btn-danger btn-sm mr-2 ml-2">EXCLUIR CLIENTE</a>
             </div>
         </div>
 
